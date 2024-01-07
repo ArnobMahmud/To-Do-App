@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/widgets/button.dart';
+import 'package:todo_app/widgets/custom_textfiled.dart';
 
 class DialogBox extends StatelessWidget {
   final TextEditingController? titleController;
@@ -28,7 +29,7 @@ class DialogBox extends StatelessWidget {
       contentPadding: const EdgeInsets.all(10),
       backgroundColor: Colors.yellow,
       content: SizedBox(
-        height: height * .6,
+        height: height * .5,
         width: width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,35 +37,30 @@ class DialogBox extends StatelessWidget {
             const Text(
               'New Task',
               style: TextStyle(
-                fontSize: 22,
+                fontSize: 24,
+                letterSpacing: 3,
               ),
             ),
             const SizedBox(
               height: 15,
             ),
-            TextField(
+            CustomTextField(
+              hintText: 'Title',
               controller: titleController!,
-              decoration: const InputDecoration(
-                hintText: 'Title',
-                border: OutlineInputBorder(),
-              ),
+              maxLines: 1,
+              minLines: 1,
+              //expands: false,
             ),
             const SizedBox(
               height: 15,
             ),
-            SizedBox(
-              height: 100,
-              child: TextField(
-                controller: descController!,
-                decoration: const InputDecoration(
-                  hintText: 'Description',
-                  border: OutlineInputBorder(),
-                ),
-              ),
+            CustomTextField(
+              hintText: 'Description',
+              controller: descController!,
+              maxLines: 3,
+              minLines: 1,
             ),
-            const SizedBox(
-              height: 15,
-            ),
+            const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

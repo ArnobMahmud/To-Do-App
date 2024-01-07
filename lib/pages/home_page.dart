@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import '../db/dummy_model.dart';
 import '../widgets/dialog_box.dart';
 import '../widgets/task_tile.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,11 +14,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final _titleController = TextEditingController();
   final _descController = TextEditingController();
-
-  List todoList = [
-    ['Flutter', 'framework', false],
-    ['MERN', '', false],
-  ];
 
   //chheck box
   void checkBoxChanged(bool? value, int? index) {
@@ -44,12 +41,23 @@ class _HomePageState extends State<HomePage> {
 
   // save task
   void saveNewTask() {
-    setState(() {
-      todoList.add([_titleController.text, _descController.text, false]);
-      _titleController.clear();
-      _descController.clear();
-    });
+    if (_titleController.text.isNotEmpty || _descController.text.isNotEmpty) {
+      setState(() {
+        todoList.add([_titleController.text, _descController.text, false]);
+        _titleController.clear();
+        _descController.clear();
+      });
+    } else {
+      Navigator.of(context).pop;
+    }
     Navigator.of(context).pop();
+  }
+
+  // delete task
+  void deleteTask(int index) {
+    setState(() {
+      todoList.removeAt(index);
+    });
   }
 
   @override
@@ -57,17 +65,33 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.yellow[200],
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 208, 131, 222),
-        title: const Text('TO DO'),
+        backgroundColor: const Color.fromARGB(255, 209, 150, 219),
+        title: Text(
+          'TO DO',
+          style: GoogleFonts.lato(
+            fontSize: 40,
+            color: const Color.fromARGB(255, 7, 14, 55),
+            letterSpacing: 2,
+          ),
+        ),
+        elevation: 7.0,
         centerTitle: true,
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color.fromARGB(255, 11, 34, 43),
-        onPressed: createNewTask,
-        child: const Icon(
-          Icons.add,
-          color: Colors.blueGrey,
-          size: 35,
+      floatingActionButton: Container(
+        width: 70.0,
+        height: 70.0,
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 9, 7, 49),
+          borderRadius: BorderRadius.circular(40),
+        ),
+        child: RawMaterialButton(
+          shape: const CircleBorder(),
+          onPressed: createNewTask,
+          child: const Icon(
+            Icons.edit,
+            size: 35,
+            color: Color.fromARGB(255, 140, 186, 223),
+          ),
         ),
       ),
       body: ListView.builder(
@@ -78,6 +102,7 @@ class _HomePageState extends State<HomePage> {
             taskDes: todoList[index]?[1],
             taskCompleted: todoList[index]?[2],
             onChanged: (value) => checkBoxChanged(value, index),
+            deleteTask: (context) => deleteTask(index),
           );
         },
       ),

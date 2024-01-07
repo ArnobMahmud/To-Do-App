@@ -1,6 +1,12 @@
-# todo_app
+# To Do App
 
-A new Flutter project.
+A todo app is a task management application that allows users to manage their tasks from a smartphone, tablet, or computer. <br>
+
+`Create A Task [Title, Description] `
+`Check Task `
+`Delete Task `
+
+<img src="https://github.com/ArnobMahmud/ToDo-App/assets/60808266/6176f8b2-56e2-40e5-9944-12650837186b" >
 
 ## Getting Started
 
