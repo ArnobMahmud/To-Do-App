@@ -1,4 +1,9 @@
-# To Do App
+# ToDo App 🤔
+
+    ~ Author : Arnob Mahmud
+    ~ mail : arnob.tech.me@gmail.com
+
+| Choose What To Do & What Not To Do!! |
 
 A todo app is a task management application that allows users to manage their tasks from a smartphone, tablet, or computer. <br>
 
